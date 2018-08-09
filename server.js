@@ -2,11 +2,24 @@ var express = require('express')
 var app = express()
 var session = require('express-session')
 
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    next();
+});
+
 app.use(session({
     resave: false,
     saveUninitialized: true,
     secret: 'any string'
 }));
+
+function login(req, res) {
+    res.send('login()');
+}
+
+app.post('/login', login);
 
 app.get('/api/session/set/:name/:value', setSession);
 app.get('/api/session/get/:name', getSession);
