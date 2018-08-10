@@ -4,12 +4,13 @@ var bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/webdev-summer2-2018');
 
-const allowedOrigins = ["http://localhost:4200", "https://webdev-2018-ysmolyar-angularjs.herokuapp.com/"];
-const origin = req.headers.origin;
-if(allowedOrigins.indexOf(origin) > -1){
-    res.setHeader('Access-Control-Allow-Origin', origin);
-}
+
 app.use(function(req, res, next) {
+    const allowedOrigins = ["http://localhost:4200", "https://webdev-2018-ysmolyar-angularjs.herokuapp.com/"];
+    const origin = req.headers.origin;
+    if(allowedOrigins.indexOf(origin) > -1){
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
