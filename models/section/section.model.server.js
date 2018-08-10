@@ -8,6 +8,9 @@ function createSection(section) {
 }
 
 function findSectionsForCourse(courseId) {
+    if (courseId === undefined) {
+        return;
+    }
     return sectionModel.find({courseId: courseId});
 }
 
