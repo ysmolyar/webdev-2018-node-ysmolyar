@@ -10,27 +10,28 @@ function findUserByCredentials(username, password) {
     return userModel.findOne({
         username: username,
         password: password
-    })
+    });
 }
 
 function findUserById(userId) {
     return userModel.findById(userId);
 }
 
-function createUser(user) {
+function updateUser(user) {
     return userModel.findOneAndUpdate(
         {username: user.username},
         {$set: {username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
-                phone: user.phone,
+                phoneNum: user.phone,
+
             }},
         {new: true});
 }
 
 
-function updateUser(user) {
+function createUser(user) {
     return userModel.create(user);
 }
 
@@ -39,10 +40,12 @@ function deleteUser(userId) {
 }
 
 function findUserByUsername(username) {
-    return userModel.findOne({username: username})
+    return userModel.findOne({username: username});
 }
 
-
+function register(user) {
+    return userModel.create(user);
+}
 
 
 var api = {
@@ -51,8 +54,9 @@ var api = {
     findUserById: findUserById,
     findUserByCredentials: findUserByCredentials,
     updateUser: updateUser,
+    register: register,
     findUserByUsername: findUserByUsername,
-    deleteUser: deleteUser,
+    deleteUser: deleteUser
 };
 
 module.exports = api;

@@ -3,8 +3,10 @@ module.exports = function(app) {
     app.get('/api/user/:userId', findUserById);
     app.post('/api/user', createUser);
     app.get('/api/profile', profile);
+    app.post('/api/register', register);
     app.post('/api/logout', logout);
     app.post('/api/login', login);
+    app.put('/api/profile', updateUser);
 
     var userModel = require('../models/user/user.model.server');
 
@@ -50,4 +52,34 @@ module.exports = function(app) {
         req.session.destroy();
         res.send(200);
     }
+
+
+    function register(req, res) {
+        var user = req.body;
+        var username = req.body.username;
+        userModel.findUserByUsername(username)
+            .then((response) => {
+                if(response) {
+                    //bad response
+                    response.send(400);
+                } else {
+                    userModel.register(user)
+                        .then(function (user) {
+                            req.session['currentUser'] = user;
+                            res.send(user);
+                        })
+                }
+            })
+    }
+
+    function updateUser(req, res) {
+        var user = req.body;
+
+        userModel.updateUser(user)
+            .then(function (response) {
+                req.session['currentUser'] = response;
+                res.send(response);
+            })
+    }
+
 }
