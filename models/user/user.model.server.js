@@ -20,12 +20,10 @@ function findUserById(userId) {
 function updateUser(user) {
     return userModel.findOneAndUpdate(
         {username: user.username},
-        {$set: {username: user.username,
-                firstName: user.firstName,
+        {$set: {firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
-                phoneNum: user.phone,
-
+                phoneNum: user.phone
             }},
         {new: true});
 }
