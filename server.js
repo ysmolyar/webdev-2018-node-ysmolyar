@@ -52,7 +52,11 @@ function getSession(req, res) {
 var userService = require('./services/user.service.server');
 userService(app);
 
+var enrollmentService = require('./services/enrollment.service.server');
+enrollmentService(app);
 
+var sectionService = require('./services/section.service.server');
+sectionService(app);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT);
