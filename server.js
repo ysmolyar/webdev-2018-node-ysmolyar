@@ -1,12 +1,11 @@
 var express = require('express')
-var cors = require('cors')
 var app = express()
 var bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://dbadmin:dbadmin1@ds029197.mlab.com:29197/webdev-summer2-2018');
 
 
-app.use(cors(), function(req, res, next) {
+app.use(function(req, res, next) {
     // const origin = ["http://localhost:4200", "https://webdev-2018-ysmolyar-angularjs.herokuapp.com"];
     res.header('Access-Control-Allow-Origin', "http://localhost:4200");
     res.header('Access-Control-Allow-Credentials', 'true');
