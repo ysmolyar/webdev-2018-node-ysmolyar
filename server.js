@@ -1,8 +1,8 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://admin:admin1@ds029197.mlab.com:29197/webdev-summer2-2018');
-
+//mongoose.connect('mongodb://admin:admin1@ds029197.mlab.com:29197/webdev-summer2-2018');
+mongoose.connect('mongodb://localhost/webdev-summer2-2018');
 var app = express()
 
 app.use(function(req, res, next) {
