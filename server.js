@@ -1,9 +1,9 @@
 var express = require('express')
-var app = express()
 var bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://dbadmin:dbadmin1@ds029197.mlab.com:29197/webdev-summer2-2018');
 
+var app = express()
 
 app.use(function(req, res, next) {
     // const origin = ["http://localhost:4200", "https://webdev-2018-ysmolyar-angularjs.herokuapp.com"];
