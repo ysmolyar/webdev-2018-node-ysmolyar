@@ -19,7 +19,7 @@ module.exports = function(app) {
     }
 
     function findUserById(req, res) {
-        var id = req.params['userId'];
+        const id = req.params['userId'];
         userModel.findUserById(id)
             .then(function (user) {
                 res.json(user);
@@ -27,7 +27,7 @@ module.exports = function(app) {
     }
 
     function isLoggedIn(req, res) {
-        var user = req.session['currentUser'];
+        const user = req.session['currentUser'];
         if (user === undefined) {
             res.sendStatus(404);
         } else {
@@ -36,12 +36,18 @@ module.exports = function(app) {
     }
 
     function login(req, res) {
-        var credentials = req.body;
+        const username = req.body.username;
+        const password = req.body.password;
         userModel
-            .findUserByCredentials(credentials.username, credentials.password)
+            .findUserByCredentials(username, password)
             .then(function (user) {
-                req.session['currentUser'] = user;
-                res.json(user);
+                if (user !== undefined) {
+                    req.session['currentUser'] = user;
+                    res.json(user);
+                }
+                else {
+                    res.sendStatus(404);
+                }
             })
     }
 
@@ -49,15 +55,16 @@ module.exports = function(app) {
         res.send(req.session['currentUser']);
     }
 
-    currentUser = (req, res) => {
+    function currentUser(req, res)  {
         const currentUser = req.session['currentUser'];
         if(currentUser) {
-            userModel.findUserByIdExpanded(currentUser._id)
-                .then(user => res.send(user));
+            res.send(currentUser);
+            // userModel.findUserByIdExpanded(currentUser._id)
+            //     .then(user => res.send(user));
         } else {
             res.sendStatus(403);
         }
-    };
+    }
 
     function createUser(req, res) {
         var user = req.body;
@@ -70,7 +77,7 @@ module.exports = function(app) {
 
     function logout(req, res) {
         req.session.destroy();
-        res.send(200);
+        res.sendStatus(200);
     }
 
 
@@ -81,7 +88,7 @@ module.exports = function(app) {
             .then((response) => {
                 if(response) {
                     //bad response
-                    response.send(400);
+                    response.sendStatus(400);
                 } else {
                     userModel.register(user)
                         .then(function (user) {
