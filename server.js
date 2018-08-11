@@ -1,10 +1,15 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 const mongoose = require('mongoose');
-//mongoose.connect('mongodb://admin:admin1@ds029197.mlab.com:29197/webdev-summer2-2018');
-mongoose.connect('mongodb://localhost/webdev-summer2-2018');
 var app = express()
 
+mongoose.connect('mongodb://user:password1@ds029197.mlab.com:29197/webdev-summer2-2018', function(err, db) {
+    if(!err) {
+        console.log("Connected to database.");
+    } else {
+        console.log("Error connecting to database.");
+    }
+});
 app.use(function(req, res, next) {
     // const origin = ["http://localhost:4200", "https://webdev-2018-ysmolyar-angularjs.herokuapp.com"];
     res.header('Access-Control-Allow-Origin', "http://localhost:4200");
