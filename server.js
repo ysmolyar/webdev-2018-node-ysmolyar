@@ -53,6 +53,4 @@ enrollmentService(app);
 
 var sectionService = require('./services/section.service.server');
 sectionService(app);
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT);
+app.listen(process.env.PORT || 3000);
