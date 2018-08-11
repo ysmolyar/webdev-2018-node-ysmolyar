@@ -6,11 +6,7 @@ mongoose.connect('mongodb://dbadmin:dbadmin1@ds029197.mlab.com:29197/webdev-summ
 
 
 app.use(function(req, res, next) {
-    const allowedOrigins = ["http://localhost:4200", "https://webdev-2018-ysmolyar-angularjs.herokuapp.com/"];
-    const origin = req.headers.origin;
-    if(allowedOrigins.indexOf(origin) > -1){
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    }
+    const origin = ["http://localhost:4200", "https://webdev-2018-ysmolyar-angularjs.herokuapp.com"];
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
