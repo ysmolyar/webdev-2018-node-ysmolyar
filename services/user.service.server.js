@@ -22,7 +22,7 @@ module.exports = function(app) {
         const id = req.params['userId'];
         userModel.findUserById(id)
             .then(function (user) {
-                res.json(user);
+                res.send(user);
             })
     }
 
@@ -31,24 +31,23 @@ module.exports = function(app) {
         if (user === undefined) {
             res.sendStatus(404);
         } else {
-            res.sendStatus(200);
+            res.sendStatus(202);
         }
     }
 
     function login(req, res) {
-        const username = req.body.username;
-        const password = req.body.password;
+        const credentials = req.body;
         userModel
-            .findUserByCredentials(username, password)
+            .findUserByCredentials(credentials.username, credentials.password)
             .then(function (user) {
-                if (user !== undefined) {
+                if (user) {
                     req.session['currentUser'] = user;
-                    res.json(user);
+                    res.send(user);
                 }
                 else {
-                    res.sendStatus(404);
+                    res.sendStatus(204);
                 }
-            })
+            });
     }
 
     function profile(req, res) {
