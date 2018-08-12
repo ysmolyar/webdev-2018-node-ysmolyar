@@ -54,17 +54,6 @@ module.exports = function(app) {
         res.send(req.session['currentUser']);
     }
 
-    function currentUser(req, res)  {
-        const currentUser = req.session['currentUser'];
-        if(currentUser) {
-            res.send(currentUser);
-            // userModel.findUserByIdExpanded(currentUser._id)
-            //     .then(user => res.send(user));
-        } else {
-            res.sendStatus(403);
-        }
-    }
-
     function createUser(req, res) {
         var user = req.body;
         userModel.createUser(user)
