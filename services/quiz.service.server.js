@@ -2,7 +2,11 @@ module.exports = function (app) {
 
     app.get('/api/quiz', findAllQuizzes);
     app.get('/api/quiz/:qid', findQuizById);
-
+    app.post('/api/quiz', createQuiz);
+    app.put('/api/quiz/:qid', updateQuiz);
+    app.delete('/api/quiz/:qid', deleteQuiz);
+    app.put('/api/quiz/:qid/question/:questionId', addQuestion);
+    app.post('/api/quiz/:qid/submission', submitQuiz);
 
     function findQuizById(req, res) {
         var quiz = quizzes.filter(function (q) {
@@ -13,4 +17,35 @@ module.exports = function (app) {
     function findAllQuizzes(req, res) {
         res.json(quizzes);
     }
-}
+
+
+    function createQuiz(req, res) {
+        quizModel.createQuiz(req.body)
+            .then(quiz => res.send(quiz))
+    }
+
+
+    function updateQuiz(req, res) {
+        quizModel.updateQuiz(req.params.qid, req.body)
+            .then(status => res.send(status))
+    }
+
+    function deleteQuiz(req, res) {
+        quizModel.deleteQuiz(req.params.qid)
+            .then(status => res.send(status))
+    }
+
+    function addQuestion(req, res) {
+        quizModel
+            .addQuestion(req.params.qid, req.params.questionId)
+            .then(
+                status => res.send(status),
+                error => res.send(error)
+            )
+    }
+
+    function submitQuiz(req, res) {
+        res.json(req.body)
+    }
+
+};
