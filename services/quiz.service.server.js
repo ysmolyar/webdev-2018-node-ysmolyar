@@ -11,9 +11,8 @@ module.exports = function (app) {
     app.post('/api/quiz/:qid/submission', submitQuiz);
 
     function findQuizById(req, res) {
-        var quiz = quizzes.filter(function (q) {
-            return q._id === req.params.qid });
-        res.json(quiz[0]);
+        quizModel.findQuizById(req.params.qid)
+            .then(quiz => res.send(quiz));
     }
 
     function findAllQuizzes(req, res) {
