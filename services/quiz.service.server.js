@@ -1,5 +1,7 @@
 module.exports = function (app) {
 
+    const quizModel = require('../models/quiz/quiz.model.server');
+
     app.get('/api/quiz', findAllQuizzes);
     app.get('/api/quiz/:qid', findQuizById);
     app.post('/api/quiz', createQuiz);
@@ -15,7 +17,8 @@ module.exports = function (app) {
     }
 
     function findAllQuizzes(req, res) {
-        res.json(quizzes);
+        quizModel.findAllQuizzes()
+            .then(quizzes => res.send(quizzes));
     }
 
 

@@ -58,4 +58,7 @@ enrollmentService(app);
 
 var sectionService = require('./services/section.service.server');
 sectionService(app);
+
+var quizService = require('./services/quiz.service.server');
+quizService(app);
 app.listen(process.env.PORT || 3000);

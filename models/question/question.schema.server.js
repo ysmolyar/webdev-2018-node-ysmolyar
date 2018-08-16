@@ -14,7 +14,7 @@ module.exports = mongoose.Schema({
             'ESSAY',
             'FILL_BLANKS',
             'TRUE_FALSE',
-            'CHOICE'
+            'MULTIPLE_CHOICE'
         ]
     }
 }, {collection: 'question'});
