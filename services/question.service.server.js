@@ -13,7 +13,7 @@ module.exports = function (app) {
 
   function createQuestion(req, res) {
       questionModel.createQuestion(req.body)
-          .then(question => res.send(body));
+          .then(question => res.send(question));
   }
 
   function findQuestionById(req, res) {

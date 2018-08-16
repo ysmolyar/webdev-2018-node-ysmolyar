@@ -61,4 +61,8 @@ sectionService(app);
 
 var quizService = require('./services/quiz.service.server');
 quizService(app);
+
+var questionService = require('./services/question.service.server');
+questionService(app);
+
 app.listen(process.env.PORT || 3000);
