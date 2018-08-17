@@ -12,7 +12,7 @@ mongoose.connect('mongodb://user:password1@ds029197.mlab.com:29197/webdev-summer
 });
 app.use(function(req, res, next) {
     // const origin = ["http://localhost:4200", "https://webdev-2018-ysmolyar-angularjs.herokuapp.com"];
-    res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.header('Access-Control-Allow-Origin', 'https://webdev-2018-ysmolyar-angularjs.herokuapp.com');
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
