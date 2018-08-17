@@ -20,7 +20,6 @@ module.exports = function (app) {
             .then(quizzes => res.send(quizzes));
     }
 
-
     function createQuiz(req, res) {
         quizModel.createQuiz(req.body)
             .then(quiz => res.send(quiz))

@@ -16,5 +16,9 @@ module.exports = mongoose.Schema({
             'TRUE_FALSE',
             'MULTIPLE_CHOICE'
         ]
-    }
+    },
+    blanks: [String],
+    realTrueFalseAnswer: Boolean,
+    realMultipleChoiceAnswer: String,
+    essayAnswer: String
 }, {collection: 'question'});
