@@ -6,7 +6,7 @@ module.exports = function (app) {
     const submissionModel = require('../models/submission/submission.model.server');
 
     function submitQuiz(req, res) {
-        res.json(req.body)
+        res.send(req.body)
     }
 
 
