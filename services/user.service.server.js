@@ -6,7 +6,7 @@ module.exports = function(app) {
     app.post('/api/register', register);
     app.post('/api/logout', logout);
     app.post('/api/login', login);
-    app.get('/api/login/loggedin', isLoggedIn);
+    app.get('/api/currentUser', currentUser);
     app.put('/api/profile', updateUser);
 
     var userModel = require('../models/user/user.model.server');
@@ -26,12 +26,15 @@ module.exports = function(app) {
             })
     }
 
-    function isLoggedIn(req, res) {
-        const user = req.session['currentUser'];
-        if (user === undefined) {
-            res.sendStatus(404);
+    function currentUser(req, res) {
+        const currentUser = req.session['currentUser'];
+        if(currentUser) {
+            userModel.findUserById(currentUser._id)
+                .then(user => {
+                    return res.send(user)
+                });
         } else {
-            res.sendStatus(202);
+            return res.sendStatus(403);
         }
     }
 
